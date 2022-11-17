@@ -1,0 +1,24 @@
+
+GET http://localhost:3000/orders
+
+###
+GET http://localhost:3000/orders/mine
+
+###
+GET http://localhost:3000/orders/3
+
+
+###
+POST http://localhost:3000/orders
+content-type: application/json
+
+###
+PUT http://localhost:3000/orders/149
+content-type: application/json
+
+{
+    "order_status": "Going"
+}
+
+###
+DELETE http://localhost:3000/orders/156

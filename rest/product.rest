@@ -1,0 +1,33 @@
+GET http://localhost:3000/products
+
+###
+GET http://localhost:3000/products/1
+
+###
+GET http://localhost:3000/products/query/%25
+
+
+###
+POST http://localhost:3000/products
+content-type: application/json
+
+{
+    "product_code" : "ELE-XXX-680",
+    "description": "Smart television (30 inch)",
+    "unit_price":  "150.00",
+    "supplier_code": "HIT-010"
+}
+
+###
+PUT http://localhost:3000/products/5
+content-type: application/json
+
+{
+    "product_code" : "KIT-PLB-003",
+    "description": "Smart television (46 inch)",
+    "unit_price":  "200.00",
+    "supplier_code": "HIT-012"
+}
+
+###
+DELETE http://localhost:3000/products/5

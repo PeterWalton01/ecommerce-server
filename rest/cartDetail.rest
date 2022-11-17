@@ -1,0 +1,29 @@
+GET http://localhost:3000/cart/items
+
+### 
+GET http://localhost:3000/cart/10/items
+
+###
+GET http://localhost:3000/cart/items/7
+
+###
+POST http://localhost:3000/cart/items
+content-type: application/json
+
+{
+    "cart_id" : "10",
+    "product_id" : "2",
+    "quantity": "4"
+
+}
+
+###
+PUT http://localhost:3000/cart/items/7
+content-type: application/json
+
+{
+    "quantity": "2"
+}
+
+###
+DELETE http://localhost:3000/cart/items/9

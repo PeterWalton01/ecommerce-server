@@ -1,0 +1,862 @@
+openapi: 3.0.1
+info:
+  title: Online Order API
+  version: 1.0.0
+  description: Ecommerce API. Logon via local account and Google logon supported.
+paths:
+  /history:
+    description: Return order headers for current user.
+    get:
+      summary: Return order headers for current user.
+      description: Return order headers for current user.
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/wip"
+      tags:
+        - Maintain Orders
+  /cart_to_order/{id}:
+    description: Create order based on a cart id.
+    get:
+      summary: Create order based on a cart id.
+      description: Create order based on a cart id.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "201":
+          description: Success.
+      tags:
+        - Maintain Orders
+  /auth/register:
+    summary: Registration and logon/logoff support
+    description: Registration and logon/logoff support
+    post:
+      summary: Register a new user
+      description: Add a new user with password.
+      operationId: addUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/register_body"
+      responses:
+        "201":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_resp"
+        "409":
+          description: Conflict - email already used.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_fail"
+      tags:
+        - Authorisation
+  /auth/login:
+    description: Login a user.
+    post:
+      summary: Allows user to login.
+      description: Allows user to login.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/login_body"
+      responses:
+        "200":
+          description: Login successful .
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_resp"
+        "409":
+          description: Conflict - already logged in.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_fail"
+        "401":
+          description: Declined - logged declined.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_fail"
+      tags:
+        - Authorisation
+  /auth/login/federated/google:
+    description: Login a user via Google.
+    post:
+      summary: Login a user via Google.
+      description: Login via Google. Returns html.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/login_body"
+      responses:
+        "200":
+          description: Login successful .
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_resp"
+        "409":
+          description: Conflict - already logged in.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_fail"
+        "401":
+          description: Declined - logged declined.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_fail"
+      tags:
+        - Authorisation        
+  /auth/logout:
+    description: Log a user out.
+    delete:
+      summary: Log a user out.
+      description: Log a user out.
+      responses:
+        "200":
+          description: Logout sucessful.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_resp"
+        "401":
+          description: Logout failed.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_fail"
+      tags:
+        - Authorisation
+  /carts:
+    description: Maintain cart headers.
+    get:
+      summary: Get all cart headers.
+      description: Get all cart headers.
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/cart_header_all"
+        "404":
+          description: None found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_fail"
+      tags:
+        - Maintain Carts
+    post:
+      summary: Create a cart header.
+      description: Create a cart header.
+      responses:
+        "201":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/cart_header"
+        "500":
+          description: Post failed.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_fail"
+      tags:
+        - Maintain Carts
+  /carts/{id}:
+    description: Get a cart header with specified id
+    get:
+      summary: Get a cart header with specified id.
+      description: Get a cart header with specified id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/cart_header"
+        "404":
+          description: None found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_fail"
+      tags:
+        - Maintain Carts
+    put:
+      summary: Update a cart header with specified id.
+      description: Update a cart header with specified id.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/cart_update"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_resp"
+        "404":
+          description: None found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_fail"
+      tags:
+        - Maintain Carts
+    delete:
+      summary: Delete a cart header.
+      description: Delete a cart header.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_resp"
+        "404":
+          description: None found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_fail"
+      tags:
+        - Maintain Carts
+  /cartitems:
+    description: Maintain cart items.
+    get:
+      summary: Get all cart items.
+      description: Get all cart items.
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/cart_item_all"
+        "404":
+          description: None found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_fail"
+      tags:
+        - Cart Item Maintenance
+    post:
+      summary: Create a cart item.
+      description: Create a cart item.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/cartitem_post_body"
+      responses:
+        "201":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/cart_item"
+        "409":
+          description: Product already in cart.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_fail"
+      tags:
+        - Cart Item Maintenance
+  /cartitems/{id}:
+    description: Get a cart item with specified id.
+    get:
+      summary: Get a cart item with specified id.
+      description: Get a cart item with specified id.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/cart_item"
+        "404":
+          description: None found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_fail"
+      tags:
+        - Cart Item Maintenance
+    put:
+      summary: Update a cart header with specified id.
+      description: Update a cart header with specified id.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/cartitem_put_body"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_resp"
+        "404":
+          description: None found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_fail"
+
+      tags:
+        - Cart Item Maintenance
+    delete:
+      summary: Remove a cart item.
+      description: Remove a cart item.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_resp"
+        "404":
+          description: None found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_fail"
+      tags:
+        - Cart Item Maintenance
+  /cart/{id}/items:
+    description: Get the items for a specific cart id.
+    get:
+      summary: Get the items for a specific cart id.
+      description: Get the items for a specific cart id.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/cart_item_all"
+        "404":
+          description: None found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/request_fail"
+
+      tags:
+        - Cart Item Maintenance
+  /orders:
+    description: Maintain order headers.
+    get:
+      summary: Get all order headers.
+      description: Get all order headers.
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/wip"
+      tags:
+        - Maintain Orders
+    post:
+      summary: Create an order header.
+      description: Create an order header.
+      responses:
+        "201":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/wip"
+      tags:
+        - Maintain Orders
+  /orders/{id}:
+    description: Get an order header with specified id
+    get:
+      summary: Get an order header with specified id.
+      description: Get an order header with specified id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success.
+      tags:
+        - Maintain Orders
+    put:
+      summary: Update an order header with specified id.
+      description: Update an order header with specified id.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/cart_update"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Maintain Orders
+    delete:
+      summary: Delete an order header.
+      description: Delete an order header.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: success.
+      tags:
+        - Maintain Orders
+  /orderitems:
+    description: Maintain order items.
+    get:
+      summary: Get all order items.
+      description: Get all order items.
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/wip"
+      tags:
+        - Order Item Maintenance
+    post:
+      summary: Create an order item.
+      description: Create an order item.
+      responses:
+        "201":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/wip"
+      tags:
+        - Order Item Maintenance
+  /orderitems/{id}:
+    description: Get an order item with specified id.
+    get:
+      summary: Get an order item with specified id.
+      description: Get an order item with specified id.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success.
+      tags:
+        - Order Item Maintenance
+    put:
+      summary: Update an order header with specified id.
+      description: Update an order header with specified id.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/cartitem_put_body"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/wip"
+      tags:
+        - Order Item Maintenance
+    delete:
+      summary: Remove an ordercart item.
+      description: Remove an order item.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: success.
+      tags:
+        - Order Item Maintenance
+  /order/{id}/items:
+    description: Get the items for a specific order id.
+    get:
+      summary: Get the items for a specific order id.
+      description: Get the items for a specific order id.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success.
+      tags:
+        - Order Item Maintenance
+  /products:
+    description: Get all products.
+    get:
+      summary: Get an array of all products.
+      description: Get an array of all products.
+      responses:
+        "200":
+          description: Success.
+      tags:
+        - Product Maintenance
+    post:
+      summary: Create a product.
+      description: Create a product.
+      responses:
+        "201":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/product_array"
+      tags:
+        - Product Maintenance 
+  /product/{id}:
+    description: Get an product with specified id
+    get:
+      summary: Get an product with specified id.
+      description: Get an product with specified id.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success.
+      tags:
+        - Product Maintenance
+    put:
+      summary: Update a product with specified id.
+      description: Update a product with specified id.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/product_post_body"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Product Maintenance
+    delete:
+      summary: Delete a product.
+      description: Delete a productr.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success.
+      tags:
+        - Product Maintenance
+  /products/query/{q}:
+    description: Get an order item with specified id.
+    get:
+      summary: Get products by query.
+      description: Get products by query.
+      parameters:
+        - in: path
+          name: q
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/product_array"
+      tags:
+        - Product Maintenance
+components:
+  schemas:
+    register_body:
+      type: object
+      properties:
+        email:
+          type: string
+          example: myMail@gmail.com
+        firstName:
+          type: string
+          example: Don
+        lastName:
+          type: string
+          example: Brown
+        password:
+          type: string
+          example: mypassword
+    login_body:
+      type: object
+      properties:
+        email:
+          type: string
+          example: myMail@gmail.com
+        password:
+          type: string
+          example: mypassword
+    cart_update:
+      type: object
+      properties:
+        cart_status:
+          type: string
+          example: Ordered
+    request_resp:
+      type: object
+      properties:
+        sucess:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Operation successful
+    request_fail:
+      type: object
+      properties:
+        sucess:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Operation failed
+    cart_header_all:
+      type: array
+      items:
+        type: object
+        properties:
+          cart_id:
+            type: number
+            example: 3
+          creation_date:
+            type: string
+            example: 2022-10-16 13:42:36.365
+          cart_status:
+            type: string
+            example: New
+    product_array:
+      type: array
+      items:
+        type: object
+        properties:
+          product_code:
+            type: string
+            example: ELE-XXX-680
+          description:
+            type: string
+            example: Smart television (30 inch)
+          unit_price:
+            type: number
+            example: 150.00
+          supplier_code:
+            type: string
+            example: HIT-010
+    cart_header:
+      type: object
+      properties:
+        cart_id:
+          type: number
+          example: 3
+        creation_date:
+          type: string
+          example: 2022-10-16 13:42:36.365
+        cart_status:
+          type: string
+          example: New
+    cart_item_all:
+      type: array
+      items:
+        type: object
+        properties:
+          cart_item_id:
+            type: number
+            example: 8
+          cart_id:
+            type: number
+            example: 3
+          product_id:
+            type: number
+            example: 23
+          description:
+            type: string
+            example: Dinner plates X 12
+          unit_price:
+            type: number
+            example: 35.67
+          quantity:
+            type: number
+            example: 4
+          creation_date:
+            type: string
+            example: 2022-10-16 13:42:36.365
+    cart_item:
+      type: object
+      properties:
+        cart_item_id:
+          type: number
+          example: 8
+        cart_id:
+          type: number
+          example: 3
+        product_id:
+          type: number
+          example: 23
+        description:
+          type: string
+          example: Dinner plates X 12
+        unit_price:
+          type: number
+          example: 35.67
+        quantity:
+          type: number
+          example: 4
+        creation_date:
+          type: string
+          example: 2022-10-16 13:42:36.365
+    cartitem_post_body:
+      type: object
+      properties:
+        cart_id:
+          type: number
+          example: 6
+        product_id:
+          type: number
+          example: 1
+        quantity:
+          type: number
+          example: 6
+    cartitem_put_body:
+      type: object
+      properties:
+        quantity:
+          type: number
+          example: 10
+    product_post_body:
+      type: object
+      properties:
+        product_code:
+          type: string
+          example: ELE-XXX-680
+        description:
+          type: string
+          example: Smart television (30 inch)
+        unit_price:
+          type: number
+          example: 150.00
+        supplier_code:
+          type: string
+          example: HIT-010
+    wip:
+      type: object
+      properties:
+        finish:
+          type: string
+          example: Work in progress
+# tags:
+#   - name: Authorisation
+#   - name: Maintain Carts
+#   - name: Cart Item Maintenance
+#   - name: Maintain Orders
+#   - name: Order Item Maintenance
+#   - name: Product Maintenance

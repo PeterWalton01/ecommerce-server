@@ -1,0 +1,19 @@
+GET http://localhost:3000/carts
+
+###
+GET http://localhost:3000/carts/1
+
+###
+POST http://localhost:3000/carts
+content-type: application/json
+
+###
+PUT http://localhost:3000/carts/1
+content-type: application/json
+
+{
+    "cart_status": "Ordered"
+}
+
+###
+DELETE http://localhost:3000/carts/9

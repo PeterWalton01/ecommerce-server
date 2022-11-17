@@ -1,0 +1,29 @@
+GET http://localhost:3000/order/items
+
+### 
+GET http://localhost:3000/order/43/items
+
+###
+GET http://localhost:3000/order/items/3
+
+###
+POST http://localhost:3000/order/items
+content-type: application/json
+
+{
+    "order_id" : "45",
+    "product_id" : "2",
+    "quantity": "6"
+
+}
+
+###
+PUT http://localhost:3000/order/items/94
+content-type: application/json
+
+{
+    "quantity": "5"
+}
+
+###
+DELETE http://localhost:3000/order/items/96
