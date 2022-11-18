@@ -20,7 +20,7 @@ const updateOrderHeader = async (req, res) => {
     // validate id
     const chkId = await readById(req.params.id);
     if (chkId.rows.length === 0) {
-      res.status(404).send({ success: false, message: "No matching Id" });
+      res.status(290).send({ success: false, message: "No matching Id" });
       throw new Error("No matching Id");
     }
     // check user is logged in and if so get user details
@@ -82,7 +82,7 @@ const deleteOrderHeader = async (req, res) => {
     // validate id
     const chkId = await readById(req.params.id);
     if (chkId.rows.length === 0) {
-      res.status(404).send({ success: false, message: "No matching Id" });
+      res.status(290).send({ success: false, message: "No matching Id" });
       throw new Error("No matching Id");
     }
     // check user is logged in and if so get user details
@@ -134,7 +134,7 @@ const addOrderHeader = async (req, res) => {
     // check user is logged in and get account email
     const currentUser = await req.user;
     if (currentUser == null) {
-      res.status(404).send({
+      res.status(290).send({
         success: false,
         message: "You are not logged in.",
       });
@@ -195,7 +195,7 @@ const getOrderHeaderById = async (req, res) => {
     if (response.rows.length > 0) {
       res.status(200).send(response.rows[0]);
     } else {
-      res.status(404).send({ success: false, message: "No such Id." });
+      res.status(290).send({ success: false, message: "No such Id." });
       return false;
     }
   } catch (error) {
@@ -210,7 +210,7 @@ const getOrderHeadersByEmail = async (req, res) => {
     // appropriate response
     const currentUser = await req.user;
     if (currentUser == null) {
-      res.status(404).send({
+      res.status(290).send({
         success: false,
         message: "You are not logged in.",
       });
@@ -220,7 +220,7 @@ const getOrderHeadersByEmail = async (req, res) => {
     if (response.rows.length > 0) {
       res.status(200).send(response.rows);
     } else {
-      res.status(404).send({ success: false, message: "No orders found." });
+      res.status(290).send({ success: false, message: "No orders found." });
       return false;
     }
   } catch (error) {

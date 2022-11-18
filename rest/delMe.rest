@@ -20,3 +20,6 @@ content-type: application/json
 
 ###
 DELETE https://ecommerce-server00.herokuapp.com/auth/logout
+
+###
+GET https://ecommerce-server00.herokuapp.com/products

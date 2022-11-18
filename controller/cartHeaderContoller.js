@@ -19,7 +19,7 @@ const deleteCartHeader = async (req, res) => {
     // check that id is valid
     const chkId = await readById(req.params.id);
     if (chkId.rows.length === 0) {
-      res.status(404).send({ success: false, message: "No matching Id" });
+      res.status(290).send({ success: false, message: "No matching Id" });
       throw new Error("No matching Id");
     }
     // delete cart header
@@ -44,7 +44,7 @@ const updateCartHeader = async (req, res) => {
     // check id is valid
     const chkId = await readById(req.params.id);
     if (chkId.rows.length === 0) {
-      res.status(404).send({ success: false, message: "No matching Id" });
+      res.status(290).send({ success: false, message: "No matching Id" });
       throw new Error("No matching Id");
     }
     // perform update
@@ -94,7 +94,7 @@ const getCartHeaderById = async (req, res) => {
     if (response.rows.length > 0) {
       res.status(200).send(response.rows[0]);
     } else {
-      res.status(404).send({ success: false, message: "No cart with that id" });
+      res.status(290).send({ success: false, message: "No cart with that id" });
       return;
     }
   } catch (error) {
@@ -116,7 +116,7 @@ const getCartHeaders = async (req, res) => {
       res.status(200).send(response.rows);
     } else {
       res
-        .status(404)
+        .status(290)
         .send({ success: false, message: "No order headers found" });
       return false;
     }

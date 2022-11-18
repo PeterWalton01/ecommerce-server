@@ -23,7 +23,7 @@ const deleteCartItem = async (req, res) => {
     // check validity of id
     const chkItem = await readById(req.params.id);
     if (chkItem.rows.length < 1) {
-      res.status(404).send({ success: false, message: "No such Id" });
+      res.status(290).send({ success: false, message: "No such Id" });
       return false;
     }
     // attempt delete
@@ -144,7 +144,7 @@ const getAllCartItems = async (req, res) => {
     if (response.rows.length > 0) {
       res.status(200).send(response.rows);
     } else {
-      res.status(404).send({ success: false, message: "No cart items found" });
+      res.status(290).send({ success: false, message: "No cart items found" });
       return false;
     }
   } catch (error) {
@@ -166,7 +166,7 @@ const getCartItemById = async (req, res) => {
     if (response.rows.length > 0) {
       res.status(200).send(response.rows[0]);
     } else {
-      res.status(404).send({ success: false, message: "Cart item not found" });
+      res.status(290).send({ success: false, message: "Cart item not found" });
       return false;
     }
   } catch (error) {
@@ -188,7 +188,7 @@ const getCartItemsByCartId = async (req, res) => {
     if (response.rows.length > 0) {
       res.status(200).send(response.rows);
     } else {
-      res.status(404).send({ success: false, message: "Cart items not found" });
+      res.status(290).send({ success: false, message: "Cart items not found" });
       return false;
     }
   } catch (error) {

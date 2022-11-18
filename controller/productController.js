@@ -19,7 +19,7 @@ const updateProduct = async (req, res) => {
     // validate id
     const chkId = await readById(req.params.id);
     if (chkId.rows.length === 0) {
-      res.status(404).send({ success: false, message: "No matching Id" });
+      res.status(290).send({ success: false, message: "No matching Id" });
       throw new Error("No matching Id");
     }
 
@@ -58,7 +58,7 @@ const deleteProduct = async (req, res) => {
     // validate id
     const chkId = await readById(req.params.id);
     if (chkId.rows.length === 0) {
-      res.status(404).send({ success: false, message: "No matching Id" });
+      res.status(290).send({ success: false, message: "No matching Id" });
       throw new Error("No matching Id");
     }
 

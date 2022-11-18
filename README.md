@@ -59,7 +59,7 @@ Further details of these features are given below, and details of the API be fou
 ## API Detail
 Technical detail of the API be found in the project yaml file, or by using the /docs end-point of the API. 
 
-General - the usual html codes are used in responses. These are 200, 201, 404, 409, and for system exceptions, 500.
+General - the usual html codes are used in responses. These are 200, 201, 290, 409, and for system exceptions, 500.
 
 We now provide details of the business logic embodied in the API.
 

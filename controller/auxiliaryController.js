@@ -15,7 +15,7 @@ const copyCartToOrder = async (req, res) => {
     // check that cart id is valid
     const chkId = await readCartById(req.params.id);
     if (chkId.rows.length === 0) {
-      res.status(404).send({ success: false, message: "No matching Id" });
+      res.status(290).send({ success: false, message: "No matching Id" });
       throw new Error("No matching Id");
     }
     // check user is logged in and if so get user details
