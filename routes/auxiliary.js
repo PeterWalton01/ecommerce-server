@@ -40,4 +40,8 @@ auxiliaryRouter.get("/history", (req, res) => {
   getOrderHeadersByEmail(req, res);
 });
 
+auxiliaryRouter.get("", (req, res) => {
+  res.status(200).send({ success: true, message: "Server here" });
+});
+
 module.exports = { auxiliaryRouter };

@@ -49,7 +49,7 @@ CREATE TABLE public.cart_items (
     "creation_date" timestamp without time zone NOT NULL,
 	CONSTRAINT fk_carts01 FOREIGN KEY(cart_id) REFERENCES carts(cart_id),
 	CONSTRAINT fk_products01 FOREIGN KEY(product_id) REFERENCES products(product_id),
-	uNIQUE(cart_id, product_id)
+	UNIQUE(cart_id, product_id)
 );
 
 
