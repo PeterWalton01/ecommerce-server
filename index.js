@@ -1,7 +1,7 @@
 /*
  * main file in application. Responsible for:
  * 1. Interaction with the application environment,
- * 1. Setting up eExpress and core middleware functions,
+ * 1. Setting up Express and core middleware functions,
  * 2. Establishing necessary routers,
  * 3. Beginning to listen on the specified port.
  */
@@ -46,7 +46,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    httpOnly: false,
+    cookie: { maxAge: 1000 * 60 * 60 },
     store: new SQLiteStore({ db: "sessions.db", dir: "./var/db" }),
   })
 );

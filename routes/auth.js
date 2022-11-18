@@ -88,9 +88,7 @@ function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  return res
-    .status(291)
-    .send({ success: false, message: "You are not logged in" });
+  return res.status(291).send({ success: false, message: "Please login." });
 }
 
 function checkNotAuthenticated(req, res, next) {
