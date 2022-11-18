@@ -10,8 +10,6 @@ require("dotenv").config();
 //   port: process.env.DB_PORT,
 // });
 
-// The options blow are for live deployment
-// In development use the pool setting above
 const pool = new Pool({
   // create connection to database
   connectionString: process.env.DATABASE_URL,

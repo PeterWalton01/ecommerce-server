@@ -26,7 +26,7 @@ const bodyParser = require("body-parser");
 // app.use(cors({ origin: true, credentials: true }));
 // prettier-ignore
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://ecommerce-client00.netlify.app'],
+  origin: ['http://localhost:3000', 'https://ecommerce-client00.netlify.app', 'https://ecommerce-client00.herokuapp.com'],
   credentials: true,
   methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'] };
 

@@ -1,0 +1,22 @@
+###
+POST https://ecommerce-server00.herokuapp.com/auth/register
+content-type: application/json
+
+{
+      "email": "myMail01@gmail.com",
+      "firstName": "Don",
+      "lastName": "Green",
+      "password": "mypassword"
+}
+
+###
+POST https://ecommerce-server00.herokuapp.com/auth/login
+content-type: application/json
+
+{
+      "email": "myMail01@gmail.com",
+      "password": "mypassword"
+}
+
+###
+DELETE https://ecommerce-server00.herokuapp.com/auth/logout
