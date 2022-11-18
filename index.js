@@ -46,6 +46,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    httpOnly: false,
     store: new SQLiteStore({ db: "sessions.db", dir: "./var/db" }),
   })
 );
