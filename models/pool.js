@@ -10,9 +10,14 @@ require("dotenv").config();
 //   port: process.env.DB_PORT,
 // });
 
+// The options blow are for live deployment
+// In development use the pool setting above
 const pool = new Pool({
   // create connection to database
-  connectionString: process.env.DATABASE_URL, // use DATABASE_URL environment variable from Heroku app
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 module.exports = pool;
