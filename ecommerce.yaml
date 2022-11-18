@@ -84,7 +84,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/request_fail"
-        "401":
+        "291":
           description: Declined - logged declined.
           content:
             application/json:
@@ -115,7 +115,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/request_fail"
-        "401":
+        "291":
           description: Declined - logged declined.
           content:
             application/json:
@@ -135,7 +135,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/request_resp"
-        "401":
+        "291":
           description: Logout failed.
           content:
             application/json:

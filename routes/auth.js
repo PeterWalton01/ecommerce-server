@@ -24,7 +24,7 @@ adminRouter.post("/login", checkNotAuthenticated, function (req, res, next) {
     // Generate a JSON response reflecting authentication status
     if (!user) {
       // return res.send({ status: false, message: "logon failed" });
-      return res.status(401).send({ success: false, message: "Logon failed" });
+      return res.status(291).send({ success: false, message: "Logon failed" });
     }
     // Establish session and send response
     req.login(user, (loginError) => {
@@ -64,7 +64,7 @@ adminRouter.get("/oauth2/redirect/google", function (req, res, next) {
       // Generate a JSON response reflecting authentication status
       if (!user) {
         // return res.send({ status: false, message: "logon failed" });
-        return res.status(401).send(googleResponse("Logon failed"));
+        return res.status(291).send(googleResponse("Logon failed"));
         // .send({ success: false, message: "Google logon failed" });
       }
       // Establish session and send response
@@ -89,7 +89,7 @@ function checkAuthenticated(req, res, next) {
     return next();
   }
   return res
-    .status(401)
+    .status(291)
     .send({ success: false, message: "You are not logged in" });
 }
 
