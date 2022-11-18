@@ -1,0 +1,12 @@
+POST https://ecommerce-server00.herokuapp.com/auth/register
+content-type: application/json
+
+{
+      "email": "myMail01@gmail.com",
+      "firstName": "Don",
+      "lastName": "Green",
+      "password": "mypassword"
+}
+
+###
+GET https://ecommerce-server00.herokuapp.com/products

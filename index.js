@@ -25,9 +25,12 @@ const bodyParser = require("body-parser");
 
 // app.use(cors({ origin: true, credentials: true }));
 // prettier-ignore
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://ecommerce-client00.netlify.app'],
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'] };
 
-app.use(cors({ origin: ['http://localhost:3000', 'https://ecommerce-client00.netlify.app'],
-              credentials : true }));
+app.use(cors(corsOptions));
 // Add middleware to support application/json
 // date from POST commands etc.
 app.use(bodyParser.json());
