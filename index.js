@@ -40,18 +40,21 @@ app.use(bodyParser.json());
 // data from POST commands etc.
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.set("trust proxy", 1);
+const sessionConfig = {
+  // Set up session with key from environment
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: new SQLiteStore({ db: "sessions.db", dir: "./var/db" }),
+  cookie: { sameSite: "none" },
+};
 
-app.use(
-  session({
-    // Set up session with key from environment
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: new SQLiteStore({ db: "sessions.db", dir: "./var/db" }),
-    cookie: { sameSite: "none", secure: true },
-  })
-);
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1); // trust first proxy
+  sessionConfig.cookie.secure = true; // serve secure cookies
+}
+
+app.use(session(sessionConfig));
 
 const startPassport = require("./passport/passport");
 startPassport(passport);
