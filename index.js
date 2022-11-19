@@ -40,6 +40,8 @@ app.use(bodyParser.json());
 // data from POST commands etc.
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.set("trust proxy", 1);
+
 app.use(
   session({
     // Set up session with key from environment
