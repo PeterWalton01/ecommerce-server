@@ -29,6 +29,7 @@ adminRouter.post("/login", checkNotAuthenticated, function (req, res, next) {
     // Establish session and send response
     req.login(user, (loginError) => {
       if (loginError) {
+        res.status(200).send({ success: false, message: "Logon failed" });
         return next(loginError);
       }
       return res

@@ -46,8 +46,8 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 },
     store: new SQLiteStore({ db: "sessions.db", dir: "./var/db" }),
+    cookie: { sameSite: "none", secure: true },
   })
 );
 
